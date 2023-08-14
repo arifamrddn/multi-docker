@@ -6,7 +6,7 @@ before_install:
   - docker build -t arumovic/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true arumovic/react-test npm test
+  - docker run arumovic/react-test npm test -- --coverage
 
 after_success:
   - docker build -t arumovic/multi-client ./client
