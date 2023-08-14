@@ -1,0 +1,15 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t arumovic/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true arumovic/react-test npm test
+
+after_success:
+  - docker build -t arumovic/multi-client ./client
+  - docker build -t arumovic/multi-nginx ./nginx
+  - docker build -t arumovic/multi-server ./server
+  - docker build -t arumovic/multi-worker ./worker
