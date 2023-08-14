@@ -7,10 +7,10 @@ services:
   redis:
     image: 'redis:latest'
   nginx:
-    restart: 'always'
     depends_on:
       - api
       - client
+    restart: always
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
@@ -19,18 +19,27 @@ services:
   api:
     build:
       dockerfile: Dockerfile.dev
-      context: ./server #bagitau kat mana nak tgk file dockerfile
+      context: ./server
     volumes:
       - /app/node_modules
-      - ./server:/app #dia akan redirect ./server as /app
+      - ./server:/app
     environment:
       - REDIS_HOST=redis
-      - REDIS_PORT=6379 #Kene tengok docu yang dia kat port mana
+      - REDIS_PORT=6379
       - PGUSER=postgres
       - PGHOST=postgres
       - PGDATABASE=postgres
       - PGPASSWORD=postgres_password
       - PGPORT=5432
+  client:
+    environment:
+      - WDS_SOCKET_PORT=0
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./client
+    volumes:
+      - /app/node_modules
+      - ./client:/app
   worker:
     build:
       dockerfile: Dockerfile.dev
@@ -41,12 +50,3 @@ services:
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-  client:
-    build:
-      dockerfile: Dockerfile.dev
-      context: ./client
-    volumes:
-      - /app/node_modules
-      - ./client:/app
-    environment:
-      - WDS_SOCKET_PORT=0
