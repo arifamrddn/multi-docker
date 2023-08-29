@@ -1,0 +1,12 @@
+{
+    "AWSEBDockerrunVersion":2,
+    "containerDefinitions": [
+        {
+            "name": "client",
+            "image": "arumovic/multi-client",
+            "hostname": "client", //untuk container lain pakai untuk panggil
+            "essential": false
+        }
+    ]
+    // berapa container kita nak buat
+}

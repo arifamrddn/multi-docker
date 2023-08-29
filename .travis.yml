@@ -11,14 +11,14 @@ services:
 #   - docker run -e CI=true arumovic/react-test npm test
 
 after_success:
-  - docker build -t arumovic/multi-client ./client
   - docker build -t arumovic/multi-nginx ./nginx
   - docker build -t arumovic/multi-server ./server
   - docker build -t arumovic/multi-worker ./worker
+  - docker build -t arumovic/multi-client ./client
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push arumovic/multi-client
   - docker push arumovic/multi-nginx
   - docker push arumovic/multi-server
   - docker push arumovic/multi-worker
+  - docker push arumovic/multi-client
