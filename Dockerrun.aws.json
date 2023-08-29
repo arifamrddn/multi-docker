@@ -4,9 +4,35 @@
         {
             "name": "client",
             "image": "arumovic/multi-client",
-            "hostname": "client", //untuk container lain pakai untuk panggil
+            "hostname": "client", 
             "essential": false
+        },
+        {
+            "name":"server",
+            "image":"arumovic/multi-server",
+            "hostname":"api",
+            "essential": false
+        },
+        {
+            "name":"worker",
+            "image":"arumovic/multi-worker",
+            "hostname":"worker",
+            "essential": false
+        },
+        {
+            "name":"nginx",
+            "image":"arumovic/multi-nginx",
+            "hostname":"nginx",
+            "essential": true,
+            "portMappings": [
+                {
+                    "hostPort":80,
+                    "containerPort":80
+                }
+            ],
+            "links": ["client","server"]
+            
         }
     ]
-    // berapa container kita nak buat
+    
 }
