@@ -5,7 +5,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t arumovic/multi-docker -f ./client/Dockerfile.dev ./client
+  - docker build -t arumovic/multi-docker -f /home/travis/build/arifamrddn/multi-docker/client/Dockerfile.dev /home/travis/build/arifamrddn/multi-docker/client
 
 script:
   - docker run -e CI=true arumovic/multi-docker npm test
