@@ -9,7 +9,7 @@ script:
 
 before_install:
   - ls -R
-  - docker build -t arumovic/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t arumovic/react-test -f /home/arumovic/multi-docker/client/Dockerfile.dev ./client
 
 after_success:
   - docker build -t arumovic/multi-client ./client
