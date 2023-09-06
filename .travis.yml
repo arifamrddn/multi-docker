@@ -4,9 +4,9 @@ language: generic
 services:
   - docker
 
-before_install:
-  - ls -R
-  - docker build -t arumovic/multi-docker -f ./client/Dockerfile.dev ./client
+# before_install:
+#   - ls -R
+#   - docker build -t arumovic/multi-docker -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true arumovic/multi-docker npm test
