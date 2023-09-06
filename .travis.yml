@@ -3,13 +3,13 @@ language: generic
 services:
   - docker
 
+script:
+  - ls -l /home/travis/build/arifamrddn/multi-docker/client
+  # - docker run -e CI=true arumovic/react-test npm test
+
 before_install:
   - ls -R
   - docker build -t arumovic/react-test -f ./client/Dockerfile.dev ./client
-
-script:
-  - ls -l /home/travis/build/arifamrddn/multi-docker/client
-  - docker run -e CI=true arumovic/react-test npm test
 
 after_success:
   - docker build -t arumovic/multi-client ./client
