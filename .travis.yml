@@ -1,4 +1,3 @@
-sudo: required
 language: generic
 
 services:
@@ -6,10 +5,11 @@ services:
 
 before_install:
   - ls -R
+  - docker build -t arumovic/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker build -t arumovic/multi-docker ./client
-  - docker run -e CI=true arumovic/multi-docker npm test
+  - ls -l /home/travis/build/arifamrddn/multi-docker/client
+  - docker run -e CI=true arumovic/react-test npm test
 
 after_success:
   - docker build -t arumovic/multi-client ./client
